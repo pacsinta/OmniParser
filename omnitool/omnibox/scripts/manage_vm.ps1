@@ -32,6 +32,7 @@ function Start-LocalVM {
             if ($response.StatusCode -eq 200) {
                 break
             }
+            Write-Host $response.StatusCode
         } catch {
             Write-Host "Waiting for a response from the computer control server"
             Start-Sleep -Seconds 5

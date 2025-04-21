@@ -12,6 +12,7 @@ from anthropic.types.beta import BetaMessage, BetaTextBlock, BetaToolUseBlock, B
 
 from agent.llm_utils.oaiclient import run_oai_interleaved
 from agent.llm_utils.groqclient import run_groq_interleaved
+from agent.llm_utils.geminiclient import run_gemini_interleaved
 from agent.llm_utils.utils import is_image_path
 import time
 import re
@@ -49,6 +50,15 @@ class VLMAgent:
             self.model = "o1"
         elif model == "omniparser + o3-mini":
             self.model = "o3-mini"
+        # "omniparser + gemini-2.5-pro-exp-03-25", "omniparser + gemini-2.0-flash", "omniparser + gemini-2.0-flash-lite", "omniparser + gemini-1.5-pro"
+        elif model == "omniparser + gemini-2.5-pro-exp-03-25":
+            self.model = "gemini-2.5-pro-exp-03-25"
+        elif model == "omniparser + gemini-2.0-flash":
+            self.model = "gemini-2.0-flash"
+        elif model == "omniparser + gemini-2.0-flash-lite":
+            self.model = "gemini-2.0-flash-lite"
+        elif model == "omniparser + gemini-1.5-pro":
+            self.model = "gemini-1.5-pro"
         else:
             raise ValueError(f"Model {model} not supported")
         
@@ -133,6 +143,15 @@ class VLMAgent:
             print(f"qwen token usage: {token_usage}")
             self.total_token_usage += token_usage
             self.total_cost += (token_usage * 2.2 / 1000000)  # https://help.aliyun.com/zh/model-studio/getting-started/models?spm=a2c4g.11186623.0.0.74b04823CGnPv7#fe96cfb1a422a
+        elif "gemini" in self.model:
+            vlm_response, token_usage = run_gemini_interleaved(
+                messages=planner_messages,
+                system=system,
+                model_name=self.model,
+                api_key=self.api_key,
+                max_tokens=min(2048, self.max_tokens),
+                temperature=0,
+            )
         else:
             raise ValueError(f"Model {self.model} not supported")
         latency_vlm = time.time() - start

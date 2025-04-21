@@ -66,7 +66,7 @@ def sampling_loop_sync(
             max_tokens=max_tokens,
             only_n_most_recent_images=only_n_most_recent_images
         )
-    elif model in set(["omniparser + gpt-4o", "omniparser + o1", "omniparser + o3-mini", "omniparser + R1", "omniparser + qwen2.5vl"]):
+    elif model in set(["omniparser + gemini-2.5-pro-exp-03-25", "omniparser + gemini-2.0-flash", "omniparser + gemini-2.0-flash-lite", "omniparser + gemini-1.5-pro", "omniparser + gpt-4o", "omniparser + o1", "omniparser + o3-mini", "omniparser + R1", "omniparser + qwen2.5vl"]):
         actor = VLMAgent(
             model=model,
             provider=provider,
@@ -116,6 +116,16 @@ def sampling_loop_sync(
             messages.append({"content": tool_result_content, "role": "user"})
     
     elif model in set(["omniparser + gpt-4o", "omniparser + o1", "omniparser + o3-mini", "omniparser + R1", "omniparser + qwen2.5vl", "omniparser + gpt-4o-orchestrated", "omniparser + o1-orchestrated", "omniparser + o3-mini-orchestrated", "omniparser + R1-orchestrated", "omniparser + qwen2.5vl-orchestrated"]):
+        while True:
+            parsed_screen = omniparser_client()
+            tools_use_needed, vlm_response_json = actor(messages=messages, parsed_screen=parsed_screen)
+
+            for message, tool_result_content in executor(tools_use_needed, messages):
+                yield message
+        
+            if not tool_result_content:
+                return messages
+    elif model in set(["omniparser + gemini-2.5-pro-exp-03-25", "omniparser + gemini-2.0-flash", "omniparser + gemini-2.0-flash-lite", "omniparser + gemini-1.5-pro"]):
         while True:
             parsed_screen = omniparser_client()
             tools_use_needed, vlm_response_json = actor(messages=messages, parsed_screen=parsed_screen)

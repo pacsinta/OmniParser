@@ -257,8 +257,12 @@ def main():
              "omniparser + R1", "omniparser + qwen2.5vl", "claude-3-5-sonnet-20241022",
              "omniparser + gpt-4o-orchestrated", "omniparser + o1-orchestrated",
              "omniparser + o3-mini-orchestrated", "omniparser + R1-orchestrated",
-             "omniparser + qwen2.5vl-orchestrated"],
-            index=6
+             "omniparser + qwen2.5vl-orchestrated",
+             "omniparser + gemini-2.5-pro-exp-03-25", 
+             "omniparser + gemini-2.0-flash", 
+             "omniparser + gemini-2.0-flash-lite", 
+             "omniparser + gemini-1.5-pro"],
+            index=9
         )
         st.session_state.model = model
 
