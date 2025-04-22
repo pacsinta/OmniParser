@@ -50,7 +50,6 @@ class VLMAgent:
             self.model = "o1"
         elif model == "omniparser + o3-mini":
             self.model = "o3-mini"
-        # "omniparser + gemini-2.5-pro-exp-03-25", "omniparser + gemini-2.0-flash", "omniparser + gemini-2.0-flash-lite", "omniparser + gemini-1.5-pro"
         elif model == "omniparser + gemini-2.5-pro-exp-03-25":
             self.model = "gemini-2.5-pro-exp-03-25"
         elif model == "omniparser + gemini-2.0-flash":
@@ -59,6 +58,8 @@ class VLMAgent:
             self.model = "gemini-2.0-flash-lite"
         elif model == "omniparser + gemini-1.5-pro":
             self.model = "gemini-1.5-pro"
+        elif model == "omniparser + gemini-2.5-flash-preview-04-17":
+            self.model = "gemini-2.5-flash-preview-04-17"
         else:
             raise ValueError(f"Model {model} not supported")
         

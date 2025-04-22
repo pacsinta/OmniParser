@@ -302,7 +302,7 @@ with gr.Blocks(theme=gr.themes.Default()) as demo:
             with gr.Column():
                 model = gr.Dropdown(
                     label="Model",
-                    choices=["omniparser + gpt-4o", "omniparser + o1", "omniparser + o3-mini", "omniparser + R1", "omniparser + qwen2.5vl", "claude-3-5-sonnet-20241022", "omniparser + gpt-4o-orchestrated", "omniparser + o1-orchestrated", "omniparser + o3-mini-orchestrated", "omniparser + R1-orchestrated", "omniparser + qwen2.5vl-orchestrated", "omniparser + gemini-2.5-pro-exp-03-25", "omniparser + gemini-2.0-flash", "omniparser + gemini-2.0-flash-lite", "omniparser + gemini-1.5-pro"],
+                    choices=["omniparser + gpt-4o", "omniparser + o1", "omniparser + o3-mini", "omniparser + R1", "omniparser + qwen2.5vl", "claude-3-5-sonnet-20241022", "omniparser + gpt-4o-orchestrated", "omniparser + o1-orchestrated", "omniparser + o3-mini-orchestrated", "omniparser + R1-orchestrated", "omniparser + qwen2.5vl-orchestrated", "omniparser + gemini-2.5-pro-exp-03-25", "omniparser + gemini-2.0-flash", "omniparser + gemini-2.0-flash-lite", "omniparser + gemini-2.5-flash-preview-04-17", "omniparser + gemini-1.5-pro"],
                     value="omniparser + gemini-2.0-flash-lite",
                     interactive=True,
                 )
@@ -362,7 +362,7 @@ with gr.Blocks(theme=gr.themes.Default()) as demo:
             provider_choices = ["groq"]
         elif model_selection == "omniparser + qwen2.5vl":
             provider_choices = ["dashscope"]
-        elif model_selection == "omniparser + gemini-2.5-pro-exp-03-25" or model_selection == "omniparser + gemini-2.0-flash" or model_selection == "omniparser + gemini-2.0-flash-lite" or model_selection == "omniparser + gemini-1.5-pro":
+        elif model_selection == "omniparser + gemini-2.5-pro-exp-03-25" or model_selection == "omniparser + gemini-2.0-flash" or model_selection == "omniparser + gemini-2.0-flash-lite" or model_selection == "omniparser + gemini-1.5-pro" or model_selection == "omniparser + gemini-2.5-flash-preview-04-17":
             provider_choices = ["google"]
         else:
             provider_choices = [option.value for option in APIProvider]
